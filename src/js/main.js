@@ -227,7 +227,7 @@ window.startSession = () => {
   speechSynthesisConfig.speechSynthesisVoiceName = TTSVoice
   document.getElementById('playVideo').className = "round-button-hide"
 
-  fetch("https://yellow-plant-0fe6d201e.5.azurestaticapps.net/api/getSpeechToken", {
+  fetch("/api/getSpeechToken", { // url of static webapp https://yellow-plant-0fe6d201e.5.azurestaticapps.net
     method: "POST"
   })
     .then(response => response.text())
