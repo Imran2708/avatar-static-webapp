@@ -27,7 +27,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             access_token, 
             status_code=200,
             headers={
-                "Access-Control-Allow-Origin":"*"
+                "Access-Control-Allow-Origin":"*",
+                "Access-Control-Allow-Methods": "POST, GET, OPTIONS"
             }
         )
 
