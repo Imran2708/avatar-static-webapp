@@ -154,46 +154,51 @@ function connectToAvatarService() {
   let videoCropTopLeftX = 600
   let videoCropBottomRightX = 1320
   let backgroundColor = '#00FF00FF'
-
-  console.log(peerConnection.localDescription)
-  const clientRequest = {
-    protocol: {
-      name: "WebRTC",
-      webrtcConfig: {
-        clientDescription: btoa(JSON.stringify(peerConnection.localDescription)),
-        iceServers: [{
-          urls: [IceServerUrl],
-          username: IceServerUsername,
-          credential: IceServerCredential
-        }]
+  //check if peerConnection.LocalDescription is ser
+  if (peerConnection.localDescription) 
+    console.log(peerConnection.localDescription)
+    const clientRequest = {
+      protocol: {
+        name: "WebRTC",
+        webrtcConfig: {
+          clientDescription: btoa(JSON.stringify(peerConnection.localDescription)),
+          iceServers: [{
+            urls: [IceServerUrl],
+            username: IceServerUsername,
+            credential: IceServerCredential
+          }]
+        },
       },
-    },
-    format: {
-      codec: 'H264',
+      format: {
+        codec: 'H264',
         resolution: {
-            width: 1920,
-            height: 1080
+          width: 1920,
+          height: 1080
         },
         crop:{
-            topLeft: {
-                x: videoCropTopLeftX,
-                y: 0
-            },
-            bottomRight: {
-                x: videoCropBottomRightX,
-                y: 1080
-            }
+          topLeft: {
+            x: videoCropTopLeftX,
+            y: 0
+          },
+          bottomRight: {
+            x: videoCropBottomRightX,
+            y: 1080
+          }
         },
         bitrate: 2000000
-    },
-    talkingAvatar: {
-      character: TalkingAvatarCharacter,
-      style: TalkingAvatarStyle,
-      background: {
+      },
+      talkingAvatar: {
+        character: TalkingAvatarCharacter,
+        style: TalkingAvatarStyle,
+        background: {
           color: backgroundColor
+        }
       }
-  }
-  }
+    };
+} else {
+  console.error("peerConnection.localDescription is not set");
+}
+}
 
   // Callback function to handle the response from TTS Avatar API
   const complete_cb = function (result) {
